@@ -140,6 +140,11 @@ void millisInit(void)
     // Enable the compare match interrupt
     TIMSK |= (1 << OCIE1A);
 #elif defined TCA0
+    // Disable the clock prescaler so that it runs at 20MHz
+    // Have to enable access first
+    CCP = CCP_IOREG_gc;
+    CLKCTRL.MCLKCTRLB = 0;
+
     TCA0.SINGLE.INTCTRL = 0 << TCA_SINGLE_CMP0_bp /* Compare 0 Interrupt: disabled */
                         | 0 << TCA_SINGLE_CMP1_bp /* Compare 1 Interrupt: disabled */
                         | 0 << TCA_SINGLE_CMP2_bp /* Compare 2 Interrupt: disabled */
