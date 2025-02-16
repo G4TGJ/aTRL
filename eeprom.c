@@ -16,6 +16,12 @@
 #include <avr/interrupt.h>
 #include <util/atomic.h>
 
+/// Initialise the EEPROM driver.
+void eepromInit( void )
+{
+    
+}
+
 uint8_t eepromRead(uint16_t uiAddress)
 {
 #ifdef NVMCTRL

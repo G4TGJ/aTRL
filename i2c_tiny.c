@@ -82,6 +82,22 @@ static uint8_t i2cByteRead()
     }
 }
 
+// Write an 8 bit byte to I2C
+uint8_t i2cWriteByte(uint8_t addr, uint8_t data)
+{
+    uint8_t stts;
+    
+    stts = i2cStart(addr, false);
+    if (!stts) return 1;
+
+    stts = i2cByteSend(data);
+    if (!stts) return 4;
+
+    i2cStop();
+
+    return 0;
+}
+
 uint8_t i2cWriteRegister(uint8_t addr, uint8_t reg, uint8_t data)
 {
     uint8_t stts;
